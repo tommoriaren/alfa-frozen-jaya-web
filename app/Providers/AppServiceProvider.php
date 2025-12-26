@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Providers;
+
+// Dua baris ini seringkali tertinggal yang menyebabkan garis merah
+use Illuminate\Support\Facades\Gate; 
+use App\Models\User; 
+
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        // Sekarang Gate tidak akan merah lagi
+        Gate::define('admin-only', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        Gate::define('karyawan-only', function (User $user) {
+            return $user->role === 'karyawan';
+        });
+    }
+}
