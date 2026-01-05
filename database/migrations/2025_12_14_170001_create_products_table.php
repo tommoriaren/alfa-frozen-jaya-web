@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('category'); // Tambahan: Kategori (misal: Sosis, Nugget)
-            $table->decimal('price', 10, 2);
-            $table->string('image')->nullable(); // Path gambar
+            $table->string('category'); // <--- Tambahkan baris ini jika belum ada
+            $table->integer('price');
+            $table->string('image');
             $table->timestamps();
         });
     }

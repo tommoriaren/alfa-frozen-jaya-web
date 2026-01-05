@@ -21,7 +21,6 @@
 
     <div class="max-w-7xl mx-auto px-4 -mt-12 mb-6 relative z-10">
         <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-6">
-            {{-- Form GET untuk Filter --}}
             <form action="{{ route('admin.product.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                 <div class="md:col-span-2">
                     <label class="text-[10px] font-black uppercase text-slate-400 ml-2 italic tracking-widest">Cari Nama Produk</label>
@@ -29,16 +28,23 @@
                            class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-xs mt-1 focus:ring-2 focus:ring-[#004B93] font-bold text-slate-700">
                 </div>
 
+                {{-- Bagian Select Kategori --}}
                 <div>
                     <label class="text-[10px] font-black uppercase text-slate-400 ml-2 italic tracking-widest">Kategori</label>
-                    {{-- Ditambahkan onchange agar filter otomatis saat kategori dipilih --}}
-                    <select name="category" onchange="this.form.submit()" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-xs mt-1 font-bold text-slate-700 focus:ring-2 focus:ring-[#004B93]">
+                    <select name="category" onchange="this.form.submit()" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-xs mt-1 font-bold text-slate-700 focus:ring-2 focus:ring-[#004B93] shadow-inner cursor-pointer">
                         <option value="">Semua Kategori</option>
                         @php
-                            $categories = ['Makanan Beku', 'Produk Dairy', 'Bahan Pokok', 'Bumbu Masak', 'Bahan Kue', 'Minuman', 'Rumah Tangga'];
+                            // Best Practice: Ambil kategori unik yang benar-benar ada di database
+                            $dbCategories = \App\Models\Product::select('category')
+                                            ->distinct()
+                                            ->whereNotNull('category')
+                                            ->orderBy('category', 'asc')
+                                            ->pluck('category');
                         @endphp
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                        @foreach($dbCategories as $cat)
+                            <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>
+                                {{ $cat }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -47,9 +53,9 @@
                     <button type="submit" class="flex-1 bg-[#004B93] text-white font-black py-3 rounded-xl text-[10px] uppercase tracking-widest hover:bg-blue-800 transition shadow-md">
                         <i class="fas fa-search mr-1"></i> Filter
                     </button>
-                    {{-- Tombol Reset --}}
-                    <a href="{{ route('admin.product.index') }}" class="bg-slate-100 text-slate-400 p-3 rounded-xl hover:bg-slate-200 transition border border-slate-200 flex items-center justify-center">
-                        <i class="fas fa-sync-alt"></i>
+
+                    <a href="{{ route('admin.product.index') }}" class="flex-1 bg-slate-100 text-slate-400 font-black py-3 rounded-xl text-[10px] uppercase tracking-widest hover:bg-slate-200 transition border border-slate-200 text-center">
+                        <i class="fas fa-undo mr-1"></i> Reset
                     </a>
                 </div>
             </form>
@@ -61,7 +67,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-slate-50 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                        <tr class="bg-slate-50 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b border-slate-100">
                             <th class="px-8 py-6">Gambar</th>
                             <th class="px-6 py-6">Nama Produk</th>
                             <th class="px-6 py-6">Kategori</th>
@@ -71,10 +77,10 @@
                     </thead>
                     <tbody class="divide-y divide-slate-50">
                         @forelse($products as $product)
-                        <tr class="hover:bg-slate-50/50 transition">
+                        <tr class="hover:bg-slate-50/50 transition duration-300">
                             <td class="px-8 py-4">
                                 @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="w-16 h-16 rounded-2xl object-cover shadow-sm border border-slate-100">
+                                    <img src="{{ asset('storage/' . $product->image) }}" class="w-16 h-16 rounded-2xl object-cover shadow-sm border-2 border-white ring-1 ring-slate-100 transition-transform group-hover:scale-105">
                                 @else
                                     <div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300">
                                         <i class="fas fa-image text-xl"></i>
@@ -92,17 +98,23 @@
                             <td class="px-6 py-4 text-sm font-bold text-slate-700">
                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="flex justify-center gap-2">
-                                    <a href="{{ route('admin.product.edit', $product->id) }}" class="w-10 h-10 bg-slate-100 text-slate-400 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
-                                        <i class="fas fa-edit text-xs"></i>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center items-center gap-2">
+                                    {{-- TOMBOL EDIT --}}
+                                    <a href="{{ route('admin.product.edit', $product->id) }}" 
+                                        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-md active:scale-95 group">
+                                        <i class="fas fa-edit text-[10px]"></i>
+                                        <span class="text-[10px] font-black uppercase italic tracking-widest">Edit</span>
                                     </a>
                                     
-                                    <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Hapus produk ini?')">
+                                    {{-- TOMBOL HAPUS --}}
+                                    <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Hapus produk {{ $product->name }}?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="w-10 h-10 bg-slate-100 text-slate-400 rounded-xl flex items-center justify-center hover:bg-red-600 hover:text-white transition">
-                                            <i class="fas fa-trash text-xs"></i>
+                                        <button type="submit" 
+                                                class="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all shadow-md active:scale-95 group">
+                                            <i class="fas fa-trash text-[10px]"></i>
+                                            <span class="text-[10px] font-black uppercase italic tracking-widest">Hapus</span>
                                         </button>
                                     </form>
                                 </div>
@@ -120,7 +132,6 @@
             </div>
             
             <div class="px-8 py-6 bg-slate-50 border-t border-slate-100">
-                {{-- Ditambahkan withQueryString agar filter tidak hilang saat navigasi halaman --}}
                 {{ $products->withQueryString()->links() }}
             </div>
         </div>

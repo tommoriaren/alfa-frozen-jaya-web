@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     
     /**
      * DASHBOARD SMART REDIRECT
-     * Mengarahkan user ke rute yang tepat segera setelah login.
+     * Mengarahkan user ke rute yang tepat berdasarkan role segera setelah login.
      */
     Route::get('/dashboard', function () {
         $role = Auth::user()->role;
@@ -36,7 +36,8 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('admin.dashboard');
         }
 
-        if ($role === 'karyawan') {
+        // Sesuaikan dengan nama role di database Anda (karyawan/staff)
+        if ($role === 'karyawan' || $role === 'staff') {
             return redirect()->route('employee.dashboard');
         }
 
@@ -60,14 +61,14 @@ Route::middleware(['auth'])->group(function () {
         // Dashboard Utama Admin
         Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         
-        // Rekap Absensi
+        // Rekap Absensi (Menampilkan foto, durasi, dan info perangkat)
         Route::get('/admin/recap', [AdminController::class, 'recap'])->name('admin.recap');
         Route::get('/admin/export', [AdminController::class, 'export'])->name('admin.export');
 
-        // CRUD Produk (Prefix Name: admin.product.)
+        // CRUD Produk
         Route::prefix('admin/produk')->name('admin.product.')->group(function () {
-            Route::get('/', [AdminController::class, 'productIndex'])->name('index');         // admin.product.index
-            Route::get('/tambah', [AdminController::class, 'productCreate'])->name('create'); // admin.product.create
+            Route::get('/', [AdminController::class, 'productIndex'])->name('index');
+            Route::get('/tambah', [AdminController::class, 'productCreate'])->name('create');
             Route::post('/simpan', [AdminController::class, 'productStore'])->name('store');
             Route::get('/{id}/edit', [AdminController::class, 'productEdit'])->name('edit');
             Route::patch('/{id}/update', [AdminController::class, 'productUpdate'])->name('update');
@@ -81,10 +82,10 @@ Route::middleware(['auth'])->group(function () {
     |----------------------------------------------------------------------
     */
     Route::middleware(['employee'])->group(function () {
-        // Dashboard Utama Karyawan
+        // Dashboard Utama Karyawan (Fungsi employeeDashboard di AdminController)
         Route::get('/staff/dashboard', [AdminController::class, 'employeeDashboard'])->name('employee.dashboard');
         
-        // Aksi Absensi
+        // Aksi Absensi (POST Method - Wajib @csrf di Form)
         Route::post('/staff/absensi/masuk', [AdminController::class, 'clockIn'])->name('clock.in');
         Route::post('/staff/absensi/pulang', [AdminController::class, 'clockOut'])->name('clock.out');
     });
@@ -92,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| 5. LOGOUT (GET Method untuk memudahkan testing di Redmi Note 7)
+| 5. LOGOUT (GET Method)
 |--------------------------------------------------------------------------
 */
 Route::get('/logout', function (Request $request) {

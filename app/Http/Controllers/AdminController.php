@@ -8,30 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class AdminController extends Controller
 {
     // ==========================================
-    // 1. DASHBOARD & RINGKASAN (Internal)
+    // 1. DASHBOARD & RINGKASAN
     // ==========================================
 
-    /**
-     * Dashboard Utama Admin.
-     * Mengarah ke: resources/views/pages/admin.blade.php
-     */
     public function dashboard()
     {
         $recentProducts = Product::latest()->take(5)->get();
         $recentAttendances = Attendance::with('user')->latest()->take(5)->get();
 
-        // FIX: Memanggil 'pages.admin' sesuai saran penyederhanaan nama file
         return view('pages.admin', compact('recentProducts', 'recentAttendances'));
     }
 
-    /**
-     * Dashboard khusus Karyawan.
-     * Mengarah ke: resources/views/pages/employee.blade.php
-     */
     public function employeeDashboard()
     {
         $attendance = Attendance::where('user_id', Auth::id())
@@ -43,26 +36,33 @@ class AdminController extends Controller
             ->take(5)
             ->get();
 
-        // FIX: Memanggil 'pages.employee'
         return view('pages.employee', compact('attendance', 'myLogs'));
     }
 
     // ==========================================
-    // 2. MANAJEMEN PRODUK (CRUD Admin)
+    // 2. MANAJEMEN PRODUK (CRUD)
     // ==========================================
 
     public function productIndex(Request $request)
     {
-        // Menggunakan query builder agar bisa difilter secara kondisional
-        $products = \App\Models\Product::latest()
-            ->when($request->search, function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
-            })
-            ->when($request->category, function ($query, $category) {
-                return $query->where('category', $category);
-            })
+        // Membangun query dasar
+        $query = Product::query();
+
+        // Filter 1: Pencarian Nama (Jika ada input 'search')
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter 2: Kategori (Jika ada input 'category')
+        // Ini adalah bagian krusial yang memastikan filter kategori bekerja
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        // Eksekusi query dengan urutan terbaru dan pagination
+        $products = $query->latest()
             ->paginate(10)
-            ->withQueryString(); // Menjaga parameter filter saat pindah halaman pagination
+            ->withQueryString(); // Menjaga parameter filter tetap ada saat pindah halaman (pagination)
 
         return view('pages.catalog-admin', compact('products'));
     }
@@ -90,7 +90,6 @@ class AdminController extends Controller
             'image'    => $imagePath,
         ]);
 
-        // FIX: Sinkronisasi rute ke admin.product.index
         return redirect()->route('admin.product.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
@@ -122,7 +121,6 @@ class AdminController extends Controller
 
         $product->update($data);
 
-        // FIX: Sinkronisasi rute ke admin.product.index
         return redirect()->route('admin.product.index')->with('success', 'Data produk diperbarui.');
     }
 
@@ -136,22 +134,34 @@ class AdminController extends Controller
 
         $product->delete();
 
-        // FIX: Sinkronisasi rute ke admin.product.index
         return redirect()->route('admin.product.index')->with('success', 'Produk berhasil dihapus.');
     }
 
-// ==========================================
-    // 3. SISTEM ABSENSI (Karyawan/Internal)
+    // ==========================================
+    // 3. SISTEM ABSENSI (GPS Validation & WebP)
     // ==========================================
 
     public function clockIn(Request $request)
     {
-        // 1. Validasi input GPS (Opsional tapi disarankan)
         $request->validate([
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048', // Max 2MB
+        ], [
+            // Pesan error kustom dalam bahasa Indonesia
+            'photo.required' => 'Foto selfie wajib diunggah.',
+            'photo.image'    => 'File harus berupa gambar.',
+            'photo.mimes'    => 'Format foto harus JPEG, PNG, JPG, atau WebP.',
+            'photo.max'      => 'Ukuran foto terlalu besar, maksimal 2MB.',
         ]);
 
+        $imagePath = $request->file('photo')->getRealPath();
+
+        // 1. VALIDASI GPS (EXIF DATA)
+        $exif = @exif_read_data($imagePath);
+        if (!$exif || !isset($exif['GPSLatitude'], $exif['GPSLongitude'])) {
+            return back()->with('error', 'Gagal! Foto tidak memiliki data lokasi. Pastikan GPS HP aktif saat mengambil foto.');
+        }
+
+        // 2. CEK APAKAH SUDAH ABSEN HARI INI
         $exists = Attendance::where('user_id', Auth::id())
             ->whereDate('created_at', Carbon::today())
             ->exists();
@@ -160,56 +170,52 @@ class AdminController extends Controller
             return back()->with('error', 'Anda sudah absen masuk hari ini.');
         }
 
-        // 2. Tangkap data IP dan GPS
+        // 3. KONVERSI KE WEBP (LIBRARY INTERVENTION)
+        $filename = 'att_' . time() . '.webp';
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($imagePath);
+        $encoded = $image->toWebp(80); // Kompresi 80%
+
+        Storage::disk('public')->put('attendance/' . $filename, $encoded);
+
+        // 4. SIMPAN KE DATABASE
         Attendance::create([
-            'user_id'    => Auth::id(),
-            'clock_in'   => now(),
-            'latitude'   => $request->latitude,
-            'longitude'  => $request->longitude,
-            'ip_address' => $request->ip(), // Fungsi bawaan Laravel untuk ambil IP
+            'user_id'     => Auth::id(),
+            'clock_in'    => now(),
+            'device_info' => $request->device_info,
+            'photo'       => 'attendance/' . $filename,
         ]);
 
-        return back()->with('success', 'Selamat bekerja! Absen masuk berhasil.');
+        return back()->with('success', 'Absen masuk berhasil! Foto dikompres ke WebP.');
     }
 
     public function clockOut(Request $request)
     {
-        // Tetap tangkap koordinat saat pulang untuk memastikan mereka masih di lokasi
-        $request->validate([
-            'latitude' => 'required',
-            'longitude' => 'required',
-        ]);
-
         $attendance = Attendance::where('user_id', Auth::id())
             ->whereDate('created_at', Carbon::today())
             ->first();
 
         if ($attendance && !$attendance->clock_out) {
             $attendance->update([
-                'clock_out'      => now(),
-                'lat_out'        => $request->latitude,  // Opsional: jika ingin mencatat lokasi pulang
-                'lng_out'        => $request->longitude, // Opsional: jika ingin mencatat lokasi pulang
-                'ip_address_out' => $request->ip(),       // Opsional
+                'clock_out'   => now(),
+                'device_info' => $request->device_info,
             ]);
-            return back()->with('success', 'Terima kasih! Absen pulang berhasil.');
+            return back()->with('success', 'Absen pulang berhasil!');
         }
 
-        return back()->with('error', 'Gagal absen pulang atau data tidak ditemukan.');
+        return back()->with('error', 'Data tidak ditemukan.');
     }
 
     public function recap(Request $request)
     {
-        // Mengambil query dasar dengan relasi user agar tidak N+1 (Penting untuk optimasi data)
         $query = Attendance::with('user');
 
-        // 1. Filter berdasarkan pencarian nama
         if ($request->filled('search')) {
             $query->whereHas('user', function($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%');
             });
         }
 
-        // 2. Filter berdasarkan rentang tanggal
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $query->whereBetween('created_at', [
                 $request->start_date . ' 00:00:00',
@@ -217,19 +223,24 @@ class AdminController extends Controller
             ]);
         }
 
-        // Ambil data dengan pagination (15 data per halaman)
         $attendances = $query->latest()->paginate(15);
+
+        $attendances->getCollection()->transform(function ($item) {
+            if ($item->clock_in && $item->clock_out) {
+                $in = Carbon::parse($item->clock_in);
+                $out = Carbon::parse($item->clock_out);
+                $item->duration = $in->diff($out)->format('%Hj %Im');
+            } else {
+                $item->duration = 'Aktif';
+            }
+            return $item;
+        });
 
         return view('pages.recap', compact('attendances'));
     }
 
-    /**
-    * Method placeholder untuk Export CSV
-    */
     public function export(Request $request)
     {
-        // Untuk sementara kita buat redirect balik, 
-        // nanti bisa kita isi dengan logika League\Csv atau FastExcel
         return back()->with('success', 'Fitur export sedang disiapkan.');
     }
 }

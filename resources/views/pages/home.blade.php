@@ -1,9 +1,13 @@
 <x-guest-layout>
+    {{-- Swiper CSS --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <section class="bg-[#004B93] pt-16 pb-24 px-6 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
-            <div class="md:w-3/5 text-center md:text-left">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10 gap-12">
+            {{-- Bagian Teks (Kiri) --}}
+            <div class="md:w-1/2 text-center md:text-left">
                 <h1 class="text-3xl md:text-6xl font-black italic leading-[0.9] text-white tracking-tighter mb-6">
-                    Aneka Frozen & Sembako <br>Lebih Lengkap, Lebih Hemat.
+                    Alfa Frozen Jaya <br> <a class="text-[#FF2800]">Lebih Lengkap, Lebih Murah</a>
                 </h1>
                 <p class="text-blue-100 text-sm md:text-lg mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed font-medium">
                     Kualitas teruji dari brand ternama. Kami pastikan suhu terjaga hingga ke tangan Anda. Khusus area Cikarang & sekitarnya.
@@ -13,12 +17,57 @@
                         Buka Katalog
                     </a>
                     <a href="{{ route('reseller') }}" class="bg-white text-[#004B93] border-2 border-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-transparent hover:text-white transition-all duration-300 text-center">
-                        Info Kemitraan
+                        Info Reseller
                     </a>
                 </div>
             </div>
+
+            {{-- Bagian Carousel (Kanan) --}}
+            <div class="md:w-1/2 w-full">
+                <div class="swiper myHeroSwiper rounded-[3rem] shadow-2xl border-4 border-white/10 overflow-hidden">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{{ asset('images/carousel1.webp') }}" class="w-full h-[300px] md:h-[450px] object-cover">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{{ asset('images/carousel2.webp') }}" class="w-full h-[300px] md:h-[450px] object-cover">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{{ asset('images/carousel3.webp') }}" class="w-full h-[300px] md:h-[450px] object-cover">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{{ asset('images/carousel4.webp') }}" class="w-full h-[300px] md:h-[450px] object-cover">
+                        </div>
+                    </div>
+                    {{-- Navigasi Bulat --}}
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
         </div>
+        {{-- Ikon Dekorasi Salju --}}
+        <i class="fas fa-snowflake absolute -right-10 -bottom-10 text-9xl text-white/5 rotate-12"></i>
     </section>
+
+    {{-- Swiper JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.myHeroSwiper', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            effect: 'creative',
+            creativeEffect: {
+                prev: { translate: [0, 0, -400], opacity: 0 },
+                next: { translate: ['100%', 0, 0] },
+            },
+        });
+    </script>
 
     <section class="bg-slate-50 py-16 px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -172,9 +221,9 @@
     <section class="px-6 pb-24">
         <div class="max-w-7xl mx-auto bg-slate-900 rounded-[3rem] p-8 md:p-16 text-center relative overflow-hidden shadow-2xl">
             <div class="relative z-10">
-                <h2 class="text-3xl md:text-5xl font-black italic uppercase text-white mb-6 tracking-tighter">Freezer di Rumah, jadi Peluang Usaha</h2>
+                <h2 class="text-3xl md:text-5xl font-black italic text-white mb-6 tracking-tighter">Mulai Bisnis Kuliner Anda Bersama Kami</h2>
                 <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-                    Mulai usaha kuliner dari rumah. Jadilah Reseller resmi Alfa Frozen Jaya dan dapatkan harga khusus stokis untuk keuntungan harian yang maksimal.
+                    Nikmati harga khusus reseller untuk ratusan produk frozen food dan sembako berkualitas.
                 </p>
                 <a href="{{ route('reseller') }}" class="inline-block bg-[#004B93] text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-800 transition shadow-xl">
                     Info Reseller

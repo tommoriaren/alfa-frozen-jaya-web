@@ -16,13 +16,13 @@
                     <div>
                         <label class="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Kategori</label>
                         <select name="category" class="w-full bg-slate-50 border-none rounded-2xl p-4 mt-1 font-bold text-slate-700 focus:ring-2 focus:ring-[#004B93]">
+                            <option value="Bahan & Bumbu Masak">Bahan & Bumbu Masak</option>
+                            <option value="Produk Dairy & Olahan Lain">Produk Dairy & Olahan Lain</option>
                             <option value="Makanan Beku">Makanan Beku</option>
-                            <option value="Produk Dairy">Produk Dairy</option>
-                            <option value="Bahan Pokok">Bahan Pokok</option>
-                            <option value="Bumbu Masak">Bumbu Masak</option>
-                            <option value="Bahan Kue">Bahan Kue</option>
-                            <option value="Minuman">Minuman</option>
-                            <option value="Rumah Tangga">Rumah Tangga</option>
+                            <option value="Minuman Kemasan">Minuman Kemasan</option>
+                            <option value="Bahan Kue & Dessert">Bahan Kue & Dessert</option>
+                            <option value="Bahan Pokok & Kering">Bahan Pokok & Kering</option>
+                            <option value="Kebutuhan Rumah Tangga">Kebutuhan Rumah Tangga</option>
                         </select>
                     </div>
 

@@ -1,40 +1,12 @@
-<x-guest-layout>
-    <section class="relative bg-gradient-to-b from-[#004B93] to-[#00366d] pt-20 pb-24 text-center text-white px-4 overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMHY0MHptMjAgMjBWMjBoMjB2MjBIMjB6TTIwIDIwVjBoMjB2MjBIMjB6IiBmaWxsPSIjRkYyODAwIi8+PC9nPjwvc3ZnPg==');"></div>
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-        
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-black italic mb-6 leading-[0.95] tracking-tighter">
-                Freezer di Rumah, <br> 
-                <span class="text-white/80">Jadi Peluang Usaha Keluarga</span>
-            </h1>
-            <p class="text-blue-100 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-medium opacity-90">
-                Mulai usaha kuliner dari rumah. Jadilah Reseller resmi Alfa Frozen Jaya dan dapatkan harga khusus stokis untuk keuntungan harian yang maksimal.
-            </p>
-        </div>
-    </section>
+<x-guest-layout> 
+    <div class="bg-[#004B93] pt-8 pb-16 text-center text-white px-4">
+        <h1 class="text-2xl md:text-4xl font-black italic">Harga Khusus Stokis: Jualan Laris, Untung Maksimal!</h1>
+        <p class="text-blue-100 mt-2 max-w-xl mx-auto text-sm md:text-base">
+            Jadilah bagian dari Reseller Resmi Alfa Frozen Jaya. Akses harga termurah untuk suplai usaha kuliner Anda dan tingkatkan profit harian tanpa ribet.
+        </p>
+    </div>
 
-    <section class="max-w-7xl mx-auto px-4 py-16 -mt-20 relative z-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-            <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 text-center group hover:bg-[#FF2800] transition-all duration-500">
-                <div class="text-5xl mb-6 group-hover:scale-110 transition duration-500">💰</div>
-                <h3 class="text-xl font-black text-slate-800 mb-3 group-hover:text-white transition">Harga Khusus Reseller</h3>
-                <p class="text-slate-500 text-sm leading-relaxed group-hover:text-red-50 transition">Dapatkan potongan harga langsung tanpa minimum order tinggi agar margin keuntungan Anda tetap tebal.</p>
-            </div>
-
-            <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 text-center group hover:bg-[#004B93] transition-all duration-500">
-                <div class="text-5xl mb-6 group-hover:scale-110 transition duration-500">📸</div>
-                <h3 class="text-xl font-black text-slate-800 mb-3 group-hover:text-white transition">Konten Siap Jualan</h3>
-                <p class="text-slate-500 text-sm leading-relaxed group-hover:text-blue-50 transition">Tidak perlu bingung desain. Kami sediakan foto produk dan materi promosi WhatsApp agar Anda tinggal posting saja.</p>
-            </div>
-
-            <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 text-center group hover:bg-[#004B93] transition-all duration-500">
-                <div class="text-5xl mb-6 group-hover:scale-110 transition duration-500">🤝</div>
-                <h3 class="text-xl font-black text-slate-800 mb-3 group-hover:text-white transition">Panduan Jualan Laris</h3>
-                <p class="text-slate-500 text-sm leading-relaxed group-hover:text-blue-50 transition">Tim kami siap membimbing cara berjualan frozen food bagi pemula agar perputaran stok di rumah Anda cepat.</p>
-            </div>
-        </div>
-
+    <section class="max-w-7xl mx-auto px-4 py-16 -mt-8 relative z-20">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
             <div class="lg:col-span-2 space-y-10 py-6">
                 <div>

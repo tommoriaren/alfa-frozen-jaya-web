@@ -7,7 +7,7 @@
                     <span class="text-[#FF2800]">ALFA </span> FROZEN <span class="text-[#FF2800]">Jaya</span>
                 </h3>
                 <p class="text-slate-500 text-[10px] font-bold leading-relaxed uppercase tracking-wider mb-6">
-                    Pusat grosir dan eceran frozen food di Bekasi. <br>Lebih lengkap, lebih hemat.
+                    Pusat grosir dan eceran frozen food di Cikarang. <br>Lebih lengkap, lebih hemat.
                 </p>
 
                 <div class="flex space-x-3">
@@ -45,10 +45,17 @@
             </div>
         </div>
         
-        <div class="border-t border-slate-800 mt-16 pt-8 text-center">
-            <p class="text-[9px] font-bold text-slate-600 uppercase tracking-[0.5em]">
-                &copy; {{ date('Y') }} ALFA FROZEN JAYA • 
-            </p>
-        </div>
+    <div class="border-t border-slate-800 mt-16 pt-8 text-center">
+        <p class="text-[9px] font-bold text-slate-600 uppercase tracking-[0.3em] flex items-center justify-center flex-wrap gap-1">
+            <span>&copy; {{ date('Y') }} ALFA FROZEN JAYA</span>
+            <span class="opacity-30 mx-1">•</span>
+            <span>Designed & Developed by</span>
+            <a href="https://www.instagram.com/tommoriaren/" 
+                class="text-slate-500 hover:text-[#E1306C] transition-all duration-300 flex items-center gap-1 ml-1 group">
+                <i class="fab fa-instagram text-[10px] group-hover:scale-110 transition-transform"></i>
+                <span class="hover:underline decoration-dotted underline-offset-4">@tommoriaren</span>
+            </a>
+        </p>
+    </div>
     </div>
 </footer>

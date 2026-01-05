@@ -1,9 +1,27 @@
 <x-guest-layout>
-    <div class="bg-[#004B93] pt-16 pb-24 text-center text-white px-4 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 2px, transparent 2px); background-size: 24px 24px;"></div>
-        <div class="relative z-10 max-w-3xl mx-auto">
-            <h1 class="text-3xl md:text-5xl font-black italic mb-4">Tentang Kami</h1>
-            <p class="text-blue-100 text-lg leading-relaxed">Mitra terpercaya UMKM Cikarang sejak 2023. Membangun ekonomi lokal melalui distribusi makanan beku berkualitas.</p>
+    <div class="bg-[#004B93] pt-8 pb-16 text-center text-white px-4">
+        <h1 class="text-2xl md:text-4xl font-black italic">Tentang Kami</h1>
+        <p class="text-blue-100 mt-2 max-w-xl mx-auto text-sm md:text-base">
+            Mitra terpercaya UMKM Cikarang sejak 2023. Membangun ekonomi lokal melalui distribusi makanan beku berkualitas.
+        </p>
+    </div>
+
+    {{-- FOTO STATIS BESAR (Hero Image Section) --}}
+    <div class="max-w-6xl mx-auto px-4 mt-4 relative z-20">
+        <div class="relative h-[300px] md:h-[500px] w-full rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
+            {{-- Ganti 'about_hero.jpg' dengan foto toko atau gudang Anda --}}
+            <img src="{{ asset('images/carousel1.webp') }}" 
+                 alt="Gudang Alfa Frozen Jaya" 
+                 class="w-full h-full object-cover">
+            
+            {{-- Overlay Gradien agar terlihat lebih sinematik --}}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            
+            {{-- Label kecil di pojok foto --}}
+            <div class="absolute bottom-8 left-8 text-white">
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-1">Established</p>
+                <p class="text-2xl font-black italic uppercase tracking-tighter">Cikarang, Indonesia</p>
+            </div>
         </div>
     </div>
 
@@ -72,7 +90,7 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12">
                     <span class="text-[#FF2800] font-bold text-xs uppercase tracking-widest">Store Locator</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-slate-800 mt-2 italic uppercase">Daftar Cabang Kami</h2>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-800 mt-2 italic">Daftar Cabang Kami</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

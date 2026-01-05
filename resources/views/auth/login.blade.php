@@ -10,7 +10,6 @@
             
             <div class="mb-6 text-center">
                 <h3 class="text-xl font-bold text-gray-800">Silakan Masuk</h3>
-                <p class="text-sm text-gray-400">Sistem Absensi</p>
             </div>
 
             <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -45,7 +44,7 @@
                 </div>
                 
                 <div class="mt-4 text-center">
-                    <a href="{{ route('home') }}" class="text-sm text-gray-400 hover:text-[#FF2800]">← Kembali ke Katalog</a>
+                    <a href="{{ route('home') }}" class="text-sm text-gray-400 hover:text-[#FF2800]">← Kembali</a>
                 </div>
             </form>
         </div>
