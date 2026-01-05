@@ -51,6 +51,8 @@
             <span class="opacity-30 mx-1">•</span>
             <span>Designed & Developed by</span>
             <a href="https://www.instagram.com/tommoriaren/" 
+                target="_blank" 
+                rel="noopener noreferrer"
                 class="text-slate-500 hover:text-[#E1306C] transition-all duration-300 flex items-center gap-1 ml-1 group">
                 <i class="fab fa-instagram text-[10px] group-hover:scale-110 transition-transform"></i>
                 <span class="hover:underline decoration-dotted underline-offset-4">@tommoriaren</span>
