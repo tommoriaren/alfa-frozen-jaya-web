@@ -26,4 +26,3 @@ Thumbs.db
 /storage/framework/sessions/*
 /storage/framework/views/*
 /storage/framework/testing/*
-/storage/app/public/*
