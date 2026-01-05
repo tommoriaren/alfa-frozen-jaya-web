@@ -11,6 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // 1. Memperbaiki masalah HTTPS/Mixed Content
+        $middleware->trustProxies(at: '*');
+
+        // 2. Mendaftarkan Middleware Custom Anda (Alias)
         // Mendaftarkan alias middleware agar bisa digunakan di routes/web.php
         $middleware->alias([
             'admin' => \App\Http\Middleware\IsAdmin::class,
