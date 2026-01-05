@@ -1,7 +1,7 @@
 <x-guest-layout>
     {{-- Header Section (Konsisten dengan Tentang Kami) --}}
     <div class="bg-[#004B93] pt-8 pb-16 text-center text-white px-4">
-        <h1 class="text-2xl md:text-4xl font-black italic uppercase">Mulai Bisnis Bersama Kami</h1>
+        <h1 class="text-2xl md:text-4xl font-black italic">Mulai Bisnis Bersama Kami</h1>
         <p class="text-blue-100 mt-2 max-w-xl mx-auto text-sm md:text-base font-medium">
             Jadilah bagian dari Reseller Resmi Alfa Frozen Jaya. Akses harga termurah untuk suplai usaha kuliner Anda dan tingkatkan profit harian.
         </p>
