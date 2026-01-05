@@ -7,23 +7,6 @@
         </p>
     </div>
 
-    {{-- Hero Image Section (Konsisten dengan Tentang Kami) --}}
-    <div class="max-w-6xl mx-auto px-4 mt-4 relative z-20">
-        <div class="relative h-[250px] md:h-[450px] w-full rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-            {{-- Foto ilustrasi gudang atau reseller --}}
-            <img src="{{ asset('images/carousel2.webp') }}" 
-                 alt="Reseller Alfa Frozen Jaya" 
-                 class="w-full h-full object-cover">
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            
-            <div class="absolute bottom-8 left-8 text-white">
-                <p class="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-1">Official Program</p>
-                <p class="text-2xl font-black italic uppercase tracking-tighter">Peluang Usaha Frozen Food</p>
-            </div>
-        </div>
-    </div>
-
     {{-- Content Section --}}
     <div class="max-w-7xl mx-auto px-4 py-16 -mt-12 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
