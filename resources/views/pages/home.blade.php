@@ -146,6 +146,43 @@
         </div>
     </section>
 
+<section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black italic text-slate-800 uppercase">Kepuasan Pelanggan</h2>
+            <p class="text-slate-500 mt-2">Ulasan dari pelanggan kami di Google Maps</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="bg-white p-2 rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden transform hover:-rotate-1 transition duration-500">
+                <img src="{{ asset('images/ulasan1.webp') }}" 
+                     alt="Ulasan Neng April" 
+                     class="rounded-[2rem] w-full object-cover">
+            </div>
+
+            <div class="space-y-6 px-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-[#FF2800] text-white p-4 rounded-2xl shadow-lg">
+                        <i class="fas fa-quote-left text-2xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-800">"Produk Lengkap & Parkir Luas"</h4>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-lg">
+                    Pelanggan kami merasa nyaman dengan pilihan produk yang komplit dari berbagai merk serta pelayanan staf yang ramah dan membantu.
+                </p>
+                <a href="https://maps.app.goo.gl/2GHf3n5GYLNscZTq9" target="_blank" class="inline-flex items-center gap-2 text-[#004B93] font-bold hover:underline">
+                    Lihat Ulasan di Google Maps <i class="fas fa-external-link-alt text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>    
+
 <section class="py-24 bg-white px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col lg:flex-row items-center gap-16">
