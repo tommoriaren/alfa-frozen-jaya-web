@@ -93,7 +93,7 @@
             const location = document.getElementById('location').value;
             const type = document.getElementById('type').value;
             const note = document.getElementById('note').value;
-            const waNumber = "628123456789"; // Sesuaikan nomor Anda
+            const waNumber = "6282260801567"; // Sesuaikan nomor Anda
 
             const text = `Halo Admin Alfa Frozen Jaya,\n\nSaya ingin mendaftar sebagai *Reseller*.\n\n*Profil Pendaftar:*\n- Nama: *${name}*\n- Domisili: *${location}*\n- Kategori: *${type}*\n\n*Pesan:* ${note}`;
             window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');

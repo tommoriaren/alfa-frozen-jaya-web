@@ -29,7 +29,7 @@
     {{-- Tombol WA hanya muncul jika user BELUM login DAN tidak sedang di halaman login --}}
     @guest
         @if(!request()->is('login*') && !request()->is('internal/login*'))
-            <a href="https://wa.me/6285709630284?text=Halo%20Alfa%20Frozen%20Jaya%2C%20saya%20mau%20tanya%20tentang%20produk..." 
+            <a href="https://wa.me/6282260801567?text=Halo%20Alfa%20Frozen%20Jaya%2C%20saya%20mau%20tanya%20tentang%20produk..." 
                 target="_blank" 
                 aria-label="Chat WhatsApp"
                 class="fixed bottom-24 right-6 md:bottom-6 z-50 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 hover:shadow-green-500/50 transition-all duration-300 ease-out active:scale-95 group">
