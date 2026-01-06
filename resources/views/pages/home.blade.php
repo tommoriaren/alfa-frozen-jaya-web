@@ -6,8 +6,14 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10 gap-12">
             {{-- Bagian Teks (Kiri) --}}
             <div class="md:w-1/2 text-center md:text-left">
-                <h1 class="text-3xl md:text-6xl font-black italic leading-[0.9] text-white tracking-tighter mb-6">
-                    Alfa Frozen Jaya <br> <a class="text-[#FF2800]">Lebih Lengkap, Lebih Murah</a>
+                <h1 class="font-black italic leading-[0.9] text-white tracking-tighter mb-6">
+                    <span class="text-4xl md:text-7xl block mb-2">
+                        Alfa Frozen Jaya
+                    </span>
+    
+                    <span class="text-xl md:text-3xl text-[#FF2800] block mt-2 uppercase tracking-normal">
+                        Lebih Lengkap, Lebih Hemat
+                    </span>
                 </h1>
                 <p class="text-blue-100 text-sm md:text-lg mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed font-medium">
                     Kualitas teruji dari brand ternama. Kami pastikan suhu terjaga hingga ke tangan Anda. Khusus area Cikarang & sekitarnya.
