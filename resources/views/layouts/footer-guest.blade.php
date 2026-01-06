@@ -39,7 +39,7 @@
                     <h4 class="text-xs font-black mb-6 text-[#FF2800] tracking-[0.2em] uppercase italic">Hubungi</h4>
                     <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 leading-loose">
                         Cikarang, Jawa Barat <br>
-                        <span class="text-white">CS: 0857-0963-0284</span>
+                        <span class="text-white">CS: 0822-6080-1567</span>
                     </p>
                 </div>
             </div>
