@@ -146,42 +146,88 @@
         </div>
     </section>
 
-<section class="py-16 bg-slate-50">
+<section class="py-20 bg-slate-50 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-black italic text-slate-800 uppercase">Kepuasan Pelanggan</h2>
-            <p class="text-slate-500 mt-2">Ulasan dari pelanggan kami di Google Maps</p>
+            <h2 class="text-3xl md:text-4xl font-black italic text-slate-800 uppercase tracking-tighter">Kepuasan Pelanggan</h2>
+            <div class="flex justify-center items-center gap-2 mt-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Maps_icon_%282020%29.svg" class="w-5 h-5" alt="Google Maps">
+                <span class="text-sm font-bold text-slate-500 uppercase tracking-widest">Ulasan Asli di Google Maps</span>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div class="bg-white p-2 rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden transform hover:-rotate-1 transition duration-500">
-                <img src="{{ asset('images/ulasan1.webp') }}" 
-                     alt="Ulasan Neng April" 
-                     class="rounded-[2rem] w-full object-cover">
-            </div>
-
-            <div class="space-y-6 px-4">
-                <div class="flex items-center gap-4">
-                    <div class="bg-[#FF2800] text-white p-4 rounded-2xl shadow-lg">
-                        <i class="fas fa-quote-left text-2xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-800">"Produk Lengkap & Parkir Luas"</h4>
-                        <div class="flex text-yellow-400 text-sm">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <div class="swiper testiSwiper">
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide py-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="bg-white p-2 rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden transform hover:-rotate-1 transition duration-500">
+                            <img src="{{ asset('images/ulasan1.webp') }}" alt="Ulasan Neng April" class="rounded-[2rem] w-full object-cover">
+                        </div>
+                        <div class="space-y-6 lg:pl-6 text-left">
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="text-3xl font-black text-slate-800 italic leading-tight uppercase">"Stock Nugget Komplit & Parkir Luas"</h3>
+                            <p class="text-slate-600 text-lg leading-relaxed font-medium">
+                                Seperti yang disampaikan <strong>Neng April</strong>, kami menyediakan berbagai merk nugget lengkap dengan pelayanan staf yang ramah dan sopan untuk membantu Anda memilih produk terbaik.
+                            </p>
+                            <div class="pt-4">
+                                <a href="https://maps.app.goo.gl/ChIJDxX7IwubaS4R5V98VPE5yUM" target="_blank" class="bg-[#004B93] text-white px-8 py-4 rounded-2xl font-black inline-flex items-center gap-3 hover:bg-blue-800 transition shadow-lg">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                    <span>LIHAT ULASAN NENG APRIL</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <p class="text-slate-600 leading-relaxed text-lg">
-                    Pelanggan kami merasa nyaman dengan pilihan produk yang komplit dari berbagai merk serta pelayanan staf yang ramah dan membantu.
-                </p>
-                <a href="https://maps.app.goo.gl/2GHf3n5GYLNscZTq9" target="_blank" class="inline-flex items-center gap-2 text-[#004B93] font-bold hover:underline">
-                    Lihat Ulasan di Google Maps <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
+
+                <div class="swiper-slide py-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="bg-white p-2 rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden transform hover:rotate-1 transition duration-500">
+                            <img src="{{ asset('images/ulasan2.webp') }}" alt="Ulasan Amir Windu" class="rounded-[2rem] w-full object-cover">
+                        </div>
+                        <div class="space-y-6 lg:pl-6 text-left">
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="text-3xl font-black text-slate-800 italic leading-tight uppercase">"Harga Terjangkau & Bisa Bayar Mudah"</h3>
+                            <p class="text-slate-600 text-lg leading-relaxed font-medium">
+                                <strong>Amir Windu</strong> merekomendasikan produk kami karena kualitasnya yang beragam, harga terjangkau, serta sistem pembayaran yang cepat dan mendukung belanja lewat TikTok.
+                            </p>
+                            <div class="pt-4">
+                                <a href="https://maps.app.goo.gl/GY2jcZRsj9cnjTJfA" target="_blank" class="bg-[#004B93] text-white px-8 py-4 rounded-2xl font-black inline-flex items-center gap-3 hover:bg-blue-800 transition shadow-lg">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                    <span>LIHAT ULASAN AMIR WINDU</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <div class="swiper-pagination !-bottom-2"></div>
         </div>
     </div>
-</section>    
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.testiSwiper', {
+            loop: true,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    });
+</script>    
 
 <section class="py-24 bg-white px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto">
