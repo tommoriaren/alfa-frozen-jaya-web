@@ -151,8 +151,7 @@
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-black italic text-slate-800 uppercase tracking-tighter">Kepuasan Pelanggan</h2>
             <div class="flex justify-center items-center gap-2 mt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Maps_icon_%282020%29.svg" class="w-5 h-5" alt="Google Maps">
-                <span class="text-sm font-bold text-slate-500 uppercase tracking-widest">Ulasan Asli di Google Maps</span>
+                <span class="text-sm font-bold text-slate-500 uppercase tracking-widest">Ulasan dari pelanggan kami di Google Maps</span>
             </div>
         </div>
 
@@ -173,7 +172,7 @@
                                 Seperti yang disampaikan <strong>Neng April</strong>, kami menyediakan berbagai merk nugget lengkap dengan pelayanan staf yang ramah dan sopan untuk membantu Anda memilih produk terbaik.
                             </p>
                             <div class="pt-4">
-                                <a href="https://maps.app.goo.gl/ChIJDxX7IwubaS4R5V98VPE5yUM" target="_blank" class="bg-[#004B93] text-white px-8 py-4 rounded-2xl font-black inline-flex items-center gap-3 hover:bg-blue-800 transition shadow-lg">
+                                <a href="https://maps.app.goo.gl/oquyw5sk1n9AoW8RA" target="_blank" class="bg-[#004B93] text-white px-8 py-4 rounded-2xl font-black inline-flex items-center gap-3 hover:bg-blue-800 transition shadow-lg">
                                     <i class="fas fa-external-link-alt text-sm"></i>
                                     <span>LIHAT ULASAN NENG APRIL</span>
                                 </a>
