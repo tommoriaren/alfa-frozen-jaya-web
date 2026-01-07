@@ -89,4 +89,4 @@ Proyek ini dikembangkan dalam rangka program **Project Based Learning (PBL) / On
 Seluruh hak cipta atas aset desain dan kode sumber ini mengikuti kebijakan kesepakatan antara pihak institusi pendidikan dan mitra industri terkait. Penggunaan di luar kepentingan edukasi dan operasional AFJ memerlukan izin tertulis.
 
 ---
-**Maintained by:** Tommy Oktoriyan Ketaren (@tommoriaren (https://github.com/tommoriaren))
+**Maintained by:** Tommy Oktoriyan Ketaren ([@tommoriaren](https://github.com/tommoriaren))
