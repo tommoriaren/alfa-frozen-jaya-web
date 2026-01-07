@@ -1,7 +1,5 @@
 # Alfa Frozen Jaya (AFJ) - Digital Portal
 
-> **Repository Name:** `alfa-frozen-jaya-web`  
-> **Description:** Platform terpadu untuk Alfa Frozen Jaya yang menggabungkan E-Katalog produk sembako/frozen food dengan Sistem Absensi karyawan berbasis web.
 
 ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
