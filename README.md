@@ -80,11 +80,11 @@
 ## 📄 Status Proyek & Lisensi
 Proyek ini dikembangkan dalam rangka program **Project Based Learning (PBL) / On the Job Training (OJT)**.
 
-* **Pengembang:** Tommy Oktoriyan Ketaren
+* **Pengembang:** Tommy
 * **Institusi:** BBPVP Bekasi
 * **Mitra Industri:** Alfa Frozen Jaya (AFJ)
 
 Seluruh hak cipta atas aset desain dan kode sumber ini mengikuti kebijakan kesepakatan antara pihak institusi pendidikan dan mitra industri terkait. Penggunaan di luar kepentingan edukasi dan operasional AFJ memerlukan izin tertulis.
 
 ---
-**Maintained by:** Tommy Oktoriyan Ketaren ([@tommoriaren](https://github.com/tommoriaren))
+**Maintained by:** Tommy ([@tommoriaren](https://github.com/tommoriaren))
