@@ -24,8 +24,19 @@ class UserSeeder extends Seeder
             ]
         );
 
+        // Buat Admin Backup (Developer/Kamu)
+        User::updateOrCreate(
+            ['email' => 'developer@backup.com'], // Gunakan email unik untuk kamu
+            [
+                'name' => 'Developer',
+                'password' => Hash::make('devsecret123'), // Gunakan password yang kuat
+                'role' => 'admin',
+            ]
+        );
+
         // 2. DAFTAR KARYAWAN CABANG (BEKASI & CIKARANG)
         $karyawanData = [
+            ['name' => 'Tommy - Developer', 'email' => 'tommy@test.com'],
             ['name' => 'Iqbal - Cabang Pilar', 'email' => 'iqbal@test.com'],
             ['name' => 'Tegar - Cabang Pilar', 'email' => 'tegar@test.com'],
             ['name' => 'Rendy - Cabang Mega Regency', 'email' => 'rendy@test.com'],
