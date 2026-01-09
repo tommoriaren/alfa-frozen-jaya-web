@@ -142,69 +142,65 @@ class AdminController extends Controller
     // ==========================================
 
     public function clockIn(Request $request)
-    {
-        $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048', // Max 2MB
-        ], [
-            // Pesan error kustom dalam bahasa Indonesia
-            'photo.required' => 'Foto selfie wajib diunggah.',
-            'photo.image'    => 'File harus berupa gambar.',
-            'photo.mimes'    => 'Format foto harus JPEG, PNG, JPG, atau WebP.',
-            'photo.max'      => 'Ukuran foto terlalu besar, maksimal 2MB.',
-        ]);
+{
+    $request->validate([
+        'photo' => 'required|image|max:2048',
+    ]);
 
-        $imagePath = $request->file('photo')->getRealPath();
+    $imagePath = $request->file('photo')->getRealPath();
 
-        // 1. VALIDASI GPS (EXIF DATA)
-        $exif = @exif_read_data($imagePath);
-        if (!$exif || !isset($exif['GPSLatitude'], $exif['GPSLongitude'])) {
-            return back()->with('error', 'Gagal! Foto tidak memiliki data lokasi. Pastikan GPS HP aktif saat mengambil foto.');
-        }
-
-        // 2. CEK APAKAH SUDAH ABSEN HARI INI
-        $exists = Attendance::where('user_id', Auth::id())
-            ->whereDate('created_at', Carbon::today())
-            ->exists();
-
-        if ($exists) {
-            return back()->with('error', 'Anda sudah absen masuk hari ini.');
-        }
-
-        // 3. KONVERSI KE WEBP (LIBRARY INTERVENTION)
-        $filename = 'att_' . time() . '.webp';
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($imagePath);
-        $encoded = $image->toWebp(80); // Kompresi 80%
-
-        Storage::disk('public')->put('attendance/' . $filename, $encoded);
-
-        // 4. SIMPAN KE DATABASE
-        Attendance::create([
-            'user_id'     => Auth::id(),
-            'clock_in'    => now(),
-            'device_info' => $request->device_info,
-            'photo'       => 'attendance/' . $filename,
-        ]);
-
-        return back()->with('success', 'Absen masuk berhasil! Foto dikompres ke WebP.');
+    // Cek GPS tapi JANGAN gagalkan proses jika tidak ada
+    $exif = @exif_read_data($imagePath);
+    $locationData = "Lokasi Tidak Terdeteksi";
+    
+    if ($exif && isset($exif['GPSLatitude'])) {
+        $locationData = "Lokasi Tersemat di Foto";
     }
+
+    // Tetap proses simpan agar karyawan tidak kesal karena error teknis
+    $filename = 'att_' . time() . '.webp';
+    $manager = new ImageManager(new Driver());
+    $image = $manager->read($imagePath);
+    $encoded = $image->toWebp(80); 
+
+    Storage::disk('public')->put('attendance/' . $filename, $encoded);
+
+    Attendance::create([
+        'user_id'     => Auth::id(),
+        'clock_in'    => now(),
+        'device_info' => $request->header('User-Agent'),
+        'photo'       => 'attendance/' . $filename,
+        'note'        => $locationData // Simpan status GPS di kolom catatan
+    ]);
+
+    return back()->with('success', 'Absen Berhasil! Semangat bekerja.');
+}
 
     public function clockOut(Request $request)
-    {
-        $attendance = Attendance::where('user_id', Auth::id())
-            ->whereDate('created_at', Carbon::today())
-            ->first();
+{
+    // 1. Cari data absensi hari ini milik user yang sedang login
+    $attendance = Attendance::where('user_id', Auth::id())
+        ->whereDate('created_at', Carbon::today())
+        ->first();
 
-        if ($attendance && !$attendance->clock_out) {
-            $attendance->update([
-                'clock_out'   => now(),
-                'device_info' => $request->device_info,
-            ]);
-            return back()->with('success', 'Absen pulang berhasil!');
-        }
-
-        return back()->with('error', 'Data tidak ditemukan.');
+    // 2. Validasi: Apakah karyawan sudah absen masuk?
+    if (!$attendance) {
+        return back()->with('error', 'Gagal! Anda belum melakukan Absen Masuk hari ini.');
     }
+
+    // 3. Validasi: Apakah sudah absen pulang sebelumnya?
+    if ($attendance->clock_out) {
+        return back()->with('error', 'Anda sudah melakukan Absen Pulang hari ini.');
+    }
+
+    // 4. Proses Update Jam Pulang
+    $attendance->update([
+        'clock_out' => now(),
+        'device_info' => $request->header('User-Agent'), // Update info perangkat terakhir
+    ]);
+
+    return back()->with('success', 'Absen Pulang Berhasil. Hati-hati di jalan!');
+}
 
     public function recap(Request $request)
     {
